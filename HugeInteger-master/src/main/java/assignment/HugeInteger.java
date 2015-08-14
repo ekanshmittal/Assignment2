@@ -67,7 +67,7 @@ public class HugeInteger {
 				return false;
 			}
 		}
-		return false;
+		return this.isNotEqualTo(that);
 	}
 
 	public boolean isLessThan(HugeInteger that) {
@@ -81,7 +81,7 @@ public class HugeInteger {
 				return false;
 			}
 		}
-		return false;
+		return this.isNotEqualTo(that);
 	}
 
 	public boolean isGreaterThanOrEqualTo(HugeInteger that) {
