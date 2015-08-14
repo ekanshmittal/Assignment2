@@ -9,14 +9,14 @@ public class HugeInteger {
 	private int length;
 
 	public HugeInteger() {
-		this.length=1;
-		number=new int[length];
+		this.length = 1;
+		number = new int[length];
 	}
 
 	public HugeInteger(String digits) {
-		digits=trimZeroes(digits);
-		this.length=digits.length();
-		this.number=new int[length];
+		digits = trimZeroes(digits);
+		this.length = digits.length();
+		this.number = new int[length];
 		parse(digits);
 	}
 
@@ -58,25 +58,30 @@ public class HugeInteger {
 	public boolean isGreaterThan(HugeInteger that) {
 		if (this.length < that.length) {
 			return false;
+		} else if (this.length > that.length) {
+			return true;
+
 		}
 		for (int i = 0; i < this.length; i++) {
 			if (this.getNumber()[i] < that.getNumber()[i]) {
 				return false;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public boolean isLessThan(HugeInteger that) {
 		if (this.length > that.length) {
 			return false;
+		} else if (this.length < that.length) {
+			return true;
 		}
 		for (int i = 0; i < this.length; i++) {
 			if (this.getNumber()[i] > that.getNumber()[i]) {
 				return false;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public boolean isGreaterThanOrEqualTo(HugeInteger that) {
