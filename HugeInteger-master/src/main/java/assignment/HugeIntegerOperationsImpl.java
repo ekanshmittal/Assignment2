@@ -29,9 +29,14 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 
 		for (int i = 0; i < findMaximum(firstNumber.getLength(), secondNumber.getLength()); i++) {
 			firstNumber.getNumber()[i] += secondNumber.getNumber()[i];
+			if (firstNumber.getNumber()[i] > 9) {
+				firstNumber.getNumber()[i + 1] = firstNumber.getNumber()[i] / 10;
+				firstNumber.getNumber()[i] = firstNumber.getNumber()[i] % 10;
+			}
 		}
 		ArrayUtils.reverse(firstNumber.getNumber());
 		return firstNumber.toString();
+
 	}
 
 	@Override
@@ -43,7 +48,11 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 		ArrayUtils.reverse(secondNumber.getNumber());
 
 		for (int i = 0; i < findMaximum(firstNumber.getLength(), secondNumber.getLength()); i++) {
-			firstNumber.getNumber()[i] -= secondNumber.getNumber()[i];
+			firstNumber.getNumber()[i] += secondNumber.getNumber()[i];
+			if (firstNumber.getNumber()[i] > 9) {
+				firstNumber.getNumber()[i + 1] = firstNumber.getNumber()[i] / 10;
+				firstNumber.getNumber()[i] = firstNumber.getNumber()[i] % 10;
+			}
 		}
 		ArrayUtils.reverse(firstNumber.getNumber());
 
