@@ -27,14 +27,26 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 		int maxLength = findMaximum(firstNumber.getLength(), secondNumber.getLength());
 		HugeInteger result = new HugeInteger(maxLength + 1);
 
+		if(firstNumber.isLessThan(secondNumber)){
+			HugeInteger tempNumber=secondNumber;
+			secondNumber=firstNumber;
+			firstNumber=tempNumber;
+		}
 		ArrayUtils.reverse(firstNumber.getNumber());
 		ArrayUtils.reverse(secondNumber.getNumber());
-
-		for (int i = 0; i < findMinimum(firstNumber.getLength(), secondNumber.getLength()); i++) {
-			result.getNumber()[i] += firstNumber.getNumber()[i] + secondNumber.getNumber()[i];
-			if (result.getNumber()[i] > 9) {
-				result.getNumber()[i + 1] += result.getNumber()[i] / 10;
-				result.getNumber()[i] = result.getNumber()[i] % 10;
+		int index=0;
+		for ( ;index < findMinimum(firstNumber.getLength(), secondNumber.getLength()); index++) {
+			result.getNumber()[index] += firstNumber.getNumber()[index] + secondNumber.getNumber()[index];
+			if (result.getNumber()[index] > 9) {
+				result.getNumber()[index + 1] += result.getNumber()[index] / 10;
+				result.getNumber()[index] = result.getNumber()[index] % 10;
+			}
+		}
+		for (; index < firstNumber.getLength(); index++) {
+			result.getNumber()[index] += firstNumber.getNumber()[index];
+			if (result.getNumber()[index] > 9) {
+				result.getNumber()[index + 1] += result.getNumber()[index] / 10;
+				result.getNumber()[index] = result.getNumber()[index] % 10;
 			}
 		}
 		ArrayUtils.reverse(result.getNumber());
