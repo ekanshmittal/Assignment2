@@ -19,7 +19,10 @@ public class HugeInteger {
 		this.number = new int[length];
 		parse(digits);
 	}
-
+	public HugeInteger(int numberOfDigits){
+		this.length=numberOfDigits;
+		this.number=new int[length];
+	}
 	public int[] getNumber() {
 		return number;
 	}

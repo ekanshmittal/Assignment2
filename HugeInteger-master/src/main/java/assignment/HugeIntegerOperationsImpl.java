@@ -24,24 +24,21 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 		HugeInteger firstNumber = new HugeInteger(first);
 		HugeInteger secondNumber = new HugeInteger(second);
 
-		if(firstNumber.isLessThan(secondNumber)){
-			HugeInteger tempNumber= secondNumber;
-			secondNumber=firstNumber;
-			firstNumber=tempNumber;
-		}
-		
+		int maxLength = findMaximum(firstNumber.getLength(), secondNumber.getLength());
+		HugeInteger result = new HugeInteger(maxLength + 1);
+
 		ArrayUtils.reverse(firstNumber.getNumber());
 		ArrayUtils.reverse(secondNumber.getNumber());
-		
+
 		for (int i = 0; i < findMinimum(firstNumber.getLength(), secondNumber.getLength()); i++) {
-			firstNumber.getNumber()[i] += secondNumber.getNumber()[i];
-			if (firstNumber.getNumber()[i] > 9) {
-				firstNumber.getNumber()[i + 1] += firstNumber.getNumber()[i] / 10;
-				firstNumber.getNumber()[i] = firstNumber.getNumber()[i] % 10;
+			result.getNumber()[i] += firstNumber.getNumber()[i] + secondNumber.getNumber()[i];
+			if (result.getNumber()[i] > 9) {
+				result.getNumber()[i + 1] += result.getNumber()[i] / 10;
+				result.getNumber()[i] = result.getNumber()[i] % 10;
 			}
 		}
-		ArrayUtils.reverse(firstNumber.getNumber());
-		return firstNumber.toString();
+		ArrayUtils.reverse(result.getNumber());
+		return result.toString();
 
 	}
 
@@ -117,6 +114,14 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 
 	private int findMinimum(Integer a, Integer b) {
 		if (a < b) {
+			return a;
+		} else {
+			return b;
+		}
+	}
+
+	private int findMaximum(Integer a, Integer b) {
+		if (a > b) {
 			return a;
 		} else {
 			return b;
