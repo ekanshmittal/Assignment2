@@ -95,6 +95,20 @@ public class HugeInteger {
 		for (Integer digit : number) {
 			digits += Integer.toString(digit);
 		}
-		return digits;
+		return trimZeroes(digits);
+	}
+
+	public String trimZeroes(String number) {
+		int index;
+		for (index = number.length(); index >= 0; index++) {
+			if (number.charAt(index) != ZERO) {
+				break;
+			}
+		}
+		if (index == 0) {
+			return Character.toString(ZERO);
+		} else {
+			return number.substring(index);
+		}
 	}
 }
