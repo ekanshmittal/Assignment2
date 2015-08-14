@@ -98,7 +98,7 @@ public class HugeInteger {
 		return trimZeroes(digits);
 	}
 
-	public String trimZeroes(String number) {
+	private String trimZeroes(String number) {
 		int index;
 		for (index = number.length(); index >= 0; index++) {
 			if (number.charAt(index) != ZERO) {
