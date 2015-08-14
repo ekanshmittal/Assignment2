@@ -20,7 +20,7 @@ public class HugeIntegerRESTApi {
 
 	@RequestMapping(value = "subtract")
 	public String sub(@RequestParam(value = "first") String first,
-			@RequestParam(value = "subtractFrom") String second) {
+			@RequestParam(value = "second") String second) {
 		return operation.subtract(first, second);
 	}
 
@@ -31,9 +31,9 @@ public class HugeIntegerRESTApi {
 	}
 
 	@RequestMapping("/operation")
-	public boolean operations(@RequestParam(value = "firstOperand") String first,
+	public boolean operations(@RequestParam(value = "first") String first,
 			@RequestParam(value = "operator") String operator,
-			@RequestParam(value = "secondOperand", defaultValue = "") String second) {
+			@RequestParam(value = "second", defaultValue = "") String second) {
 		return operation.operations(first, second, operator);
 	}
 }
