@@ -27,15 +27,15 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 		int maxLength = findMaximum(firstNumber.getLength(), secondNumber.getLength());
 		HugeInteger result = new HugeInteger(maxLength + 1);
 
-		if(firstNumber.isLessThan(secondNumber)){
-			HugeInteger tempNumber=secondNumber;
-			secondNumber=firstNumber;
-			firstNumber=tempNumber;
+		if (firstNumber.isLessThan(secondNumber)) {
+			HugeInteger tempNumber = secondNumber;
+			secondNumber = firstNumber;
+			firstNumber = tempNumber;
 		}
 		ArrayUtils.reverse(firstNumber.getNumber());
 		ArrayUtils.reverse(secondNumber.getNumber());
-		int index=0;
-		for ( ;index < findMinimum(firstNumber.getLength(), secondNumber.getLength()); index++) {
+		int index = 0;
+		for (; index < findMinimum(firstNumber.getLength(), secondNumber.getLength()); index++) {
 			result.getNumber()[index] += firstNumber.getNumber()[index] + secondNumber.getNumber()[index];
 			if (result.getNumber()[index] > 9) {
 				result.getNumber()[index + 1] += result.getNumber()[index] / 10;
@@ -58,9 +58,16 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 	public String subtract(String first, String second) {
 		HugeInteger firstNumber = new HugeInteger(first);
 		HugeInteger secondNumber = new HugeInteger(second);
-
+		boolean isNegative = false;
 		ArrayUtils.reverse(firstNumber.getNumber());
 		ArrayUtils.reverse(secondNumber.getNumber());
+
+		if (firstNumber.isLessThan(secondNumber)) {
+			HugeInteger tempNumber = secondNumber;
+			secondNumber = firstNumber;
+			firstNumber = tempNumber;
+			isNegative = true;
+		}
 
 		for (int i = 0; i < findMinimum(firstNumber.getLength(), secondNumber.getLength()); i++) {
 			firstNumber.getNumber()[i] -= secondNumber.getNumber()[i];
@@ -70,6 +77,10 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 			}
 		}
 		ArrayUtils.reverse(firstNumber.getNumber());
+
+		if (isNegative) {
+			return "-" + firstNumber.toString();
+		}
 		return firstNumber.toString();
 	}
 
