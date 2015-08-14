@@ -6,19 +6,18 @@ public class HugeInteger {
 	private static final String EMPTY_STRING = "";
 
 	private int[] number;
-	private int length = 0;
+	private int length;
 
 	public HugeInteger() {
-		this(new int[NUMBER_OF_DIGITS]);
+		this.length=1;
+		number=new int[length];
 	}
 
 	public HugeInteger(String digits) {
-		this();
+		digits=trimZeroes(digits);
+		this.length=digits.length();
+		this.number=new int[length];
 		parse(digits);
-	}
-
-	public HugeInteger(int[] number) {
-		this.number = number;
 	}
 
 	public int[] getNumber() {
@@ -37,7 +36,6 @@ public class HugeInteger {
 		for (int index = 0; index < digits.length(); index++) {
 			number[index] = digits.charAt(index) - ZERO;
 		}
-		this.length = digits.length();
 	}
 
 	public boolean isEqualTo(HugeInteger that) {
@@ -100,12 +98,12 @@ public class HugeInteger {
 
 	private String trimZeroes(String number) {
 		int index;
-		for (index = number.length(); index >= 0; index++) {
+		for (index = 0; index < number.length(); index++) {
 			if (number.charAt(index) != ZERO) {
 				break;
 			}
 		}
-		if (index == 0) {
+		if (index == number.length()) {
 			return Character.toString(ZERO);
 		} else {
 			return number.substring(index);
