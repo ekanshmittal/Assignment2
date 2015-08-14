@@ -27,7 +27,7 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 		ArrayUtils.reverse(firstNumber.getNumber());
 		ArrayUtils.reverse(secondNumber.getNumber());
 
-		for (int i = 0; i < findMaximum(firstNumber.getLength(), secondNumber.getLength()); i++) {
+		for (int i = 0; i < findMinimum(firstNumber.getLength(), secondNumber.getLength()); i++) {
 			firstNumber.getNumber()[i] += secondNumber.getNumber()[i];
 			if (firstNumber.getNumber()[i] > 9) {
 				firstNumber.getNumber()[i + 1] = firstNumber.getNumber()[i] / 10;
@@ -47,7 +47,7 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 		ArrayUtils.reverse(firstNumber.getNumber());
 		ArrayUtils.reverse(secondNumber.getNumber());
 
-		for (int i = 0; i < findMaximum(firstNumber.getLength(), secondNumber.getLength()); i++) {
+		for (int i = 0; i < findMinimum(firstNumber.getLength(), secondNumber.getLength()); i++) {
 			firstNumber.getNumber()[i] -= secondNumber.getNumber()[i];
 			if (firstNumber.getNumber()[i] < 0) {
 				firstNumber.getNumber()[i] += 10;
@@ -109,8 +109,8 @@ public class HugeIntegerOperationsImpl implements HugeIntegerOperations {
 		return true;
 	}
 
-	private int findMaximum(Integer a, Integer b) {
-		if (a > b) {
+	private int findMinimum(Integer a, Integer b) {
+		if (a < b) {
 			return a;
 		} else {
 			return b;
